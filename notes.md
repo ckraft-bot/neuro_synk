@@ -18,7 +18,7 @@ df = pd.read_csv("hf://datasets/Sp1786/multiclass-sentiment-analysis-dataset/" +
     - PEFT + QLORA --> Use `bitsandbytes` for quantization.
 - axolotl (streamlined fine tuning framework)
 
-_quantizaation_ is a technique that reduces the size of an AI model without significantly hurting its performance. This is important for fine-tuning on local machines because it lowers memory usage and speeds up training.
+_quantization_ is a technique that reduces the size of an AI model without significantly hurting its performance. This is important for fine-tuning on local machines because it lowers memory usage and speeds up training.
 
 __Why Use Quantization (bitsandbytes)?__
 Without quantization: A model like Gemma 2B might take up 4-8GB of VRAM (or even more RAM).
