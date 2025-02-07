@@ -28,7 +28,7 @@ __How bitsandbytes Helps__
 bitsandbytes is a library that helps convert large models into smaller, 4-bit or 8-bit versions while keeping most of their accuracy.
 QLoRA uses bitsandbytes to apply LoRA fine-tuning efficiently.
 
-__How to Apply Quantization in Hugging Face + QLoRA__
+__How to apply quantization in Hugging Face + QLoRA__
 
 1. install bitsandbytes:
 
