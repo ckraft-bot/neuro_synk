@@ -50,7 +50,7 @@ model = AutoModelForCausalLM.from_pretrained("google/gemma-2b", quantization_con
 tokenizer = AutoTokenizer.from_pretrained("google/gemma-2b")
 ```
 
-## FINE TUNING EVAL
+__Fine tuning eval__
 measure for tone accuracy
 - similarity score
 
