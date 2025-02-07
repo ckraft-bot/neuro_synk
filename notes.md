@@ -1,4 +1,4 @@
-# datasets
+# DATASETS
 __Tone analysis:__
 
 ```bash
@@ -11,16 +11,14 @@ splits = {'train': 'train_df.csv', 'validation': 'val_df.csv', 'test': 'test_df.
 df = pd.read_csv("hf://datasets/Sp1786/multiclass-sentiment-analysis-dataset/" + splits["train"])
 ```
 
-# fine tuning tools
+# FINE TUNING MODELS
 - gemma 2b out of box
 - hugging face + PEFT + QLORA
     - gemma as base line (zero shot)
     - PEFT + QLORA --> Use `bitsandbytes` for quantization.
 - axolotl (streamlined fine tuning framework)
 
-_quantizaation_
-__Definition__
-Quantization is a technique that reduces the size of an AI model without significantly hurting its performance. This is important for fine-tuning on local machines because it lowers memory usage and speeds up training.
+_quantizaation_ is a technique that reduces the size of an AI model without significantly hurting its performance. This is important for fine-tuning on local machines because it lowers memory usage and speeds up training.
 
 __Why Use Quantization (bitsandbytes)?__
 Without quantization: A model like Gemma 2B might take up 4-8GB of VRAM (or even more RAM).
@@ -32,13 +30,13 @@ QLoRA uses bitsandbytes to apply LoRA fine-tuning efficiently.
 
 __How to Apply Quantization in Hugging Face + QLoRA__
 
-First install bitsandbytes:
+1. install bitsandbytes:
 
 ```bash
 pip install bitsandbytes transformers accelerate peft
 ```
 
-Then load the model in 4bit mode for lower memeory usuage:
+2. load the model in 4bit mode for lower memeory usuage:
 ```bash
 from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
 
@@ -52,17 +50,16 @@ model = AutoModelForCausalLM.from_pretrained("google/gemma-2b", quantization_con
 tokenizer = AutoTokenizer.from_pretrained("google/gemma-2b")
 ```
 
-## evaluation
+## FINE TUNING EVAL
 measure for tone accuracy
 - similarity score
 
-# implementation
+# IMPLEMENTATION
 - backend: python with fast api 
 - frontend: streamlit 
 - try shipping with docker
 
-
-# test my hardware
+# HARDWARE EVAL
 ```bash
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
