@@ -1,40 +1,45 @@
 import streamlit as st
 import requests
 
-import streamlit as st
-import requests
-
 # Ollama API endpoint
 OLLAMA_URL = "http://localhost:11434/api/generate"
 
 # Assistant Role Definition
-SYSTEM_PROMPT = """
-You are a communication assistant designed to help autistic individuals with written communication. 
-You are a professional linguist, skilled in analyzing tone and formalizing text. 
+ADVOCATE_PROMPT = """
+You are empathetic and patient autism advocate. You have psychology background and are skilled in understanding and supporting autistic individuals.
+You can:
+- Create social stories to help individuals understand social situations to reduce anxiety.
+- Help individuals regulate their emotions by providing coping strategies.
+"""
+
+LINGUIST_PROMPT = """ 
+You are a professional linguist, skilled in analyzing tone and translating text; you are deigned to help autistic individuals with written communication. 
 You can:
 - Judge the tone of a given text (e.g., professional, sarcastic, neutral, aggressive).
 - Transform text into different tones (e.g., more formal, more friendly, more concise).
-- Provide clear, structured responses that are easy to understand.
+- Provide clear, concise, and structured responses that are easy to understand.
 """
 
 st.title("Sync :arrow_up: with Neuro Synk")
 
 # User selects a task
-task = st.segmented_control("What would you like to do?", ["Judge Tone", "Translate Text"])
+task = st.segmented_control("How can I be helpful to you?", ["Judge Tone", "Translate Text", "Create Social Story"])
 
 # Text input
 user_input = st.text_area("Enter text here:")
 tone_option = None
 if task == "Translate Text":
-    tone_option = st.selectbox("Choose a tone:", ["Professional", "Friendly", "Sarcastic/Ironic", "Humorous", "Empathetic", "Persuasive"])
+    tone_option = st.selectbox("Choose a tone:", ["Assertive", "Empathetic", "Formal", "Friendly", "Humorous", "Informal", "Neutral", "Sarcastic"])
 
 if st.button(":sparkles: Synk Up! :sparkles:"):
     if user_input:
         # Modify prompt based on task
         if task == "Judge Tone":
-            prompt = f"{SYSTEM_PROMPT}\nAnalyze the tone of this text:\n\n{user_input}\n\nAssistant:"
+            prompt = f"{LINGUIST_PROMPT}\nAnalyze the tone of this text:\n\n{user_input}\n\nAssistant:"
         elif task == "Translate Text" and tone_option:
-            prompt = f"{SYSTEM_PROMPT}\nRewrite this text in a more {tone_option.lower()} tone:\n\n{user_input}\n\nAssistant:"
+            prompt = f"{LINGUIST_PROMPT}\nRewrite this text in a more {tone_option.lower()} tone:\n\n{user_input}\n\nAssistant:"
+        elif task == "Create Social Story":
+            prompt = f"{ADVOCATE_PROMPT}\nCreate a social story based on this text:\n\n{user_input}\n\nAssistant:"
 
         # Send request to Ollama
         response = requests.post(OLLAMA_URL, json={"model": "gemma:2b", "prompt": prompt, "stream": False})
