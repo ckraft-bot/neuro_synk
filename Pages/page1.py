@@ -5,18 +5,12 @@ import requests
 OLLAMA_URL = "http://localhost:11434/api/generate"
 
 # Assistant Role Definition
-ADVOCATE_PROMPT = """
-You are empathetic and patient autism advocate. You have psychology background and are skilled in understanding and supporting autistic individuals.
-You can:
-- Create social stories to help individuals understand social situations to reduce anxiety.
-- Help individuals regulate their emotions by providing coping strategies.
-"""
-
-LINGUIST_PROMPT = """ 
+SYSTEM_PROMPT = """ 
 You are a professional linguist, skilled in analyzing tone and translating text; you are deigned to help autistic individuals with written communication. 
 You can:
 - Judge the tone of a given text (e.g., professional, sarcastic, neutral, aggressive).
 - Transform text into different tones (e.g., more formal, more friendly, more concise).
+- Create social stories to help individuals understand social situations to reduce anxiety.
 - Provide clear, concise, and structured responses that are easy to understand.
 """
 
@@ -35,11 +29,11 @@ if st.button(":sparkles: Synk Up! :sparkles:"):
     if user_input:
         # Modify prompt based on task
         if task == "Judge Tone":
-            prompt = f"{LINGUIST_PROMPT}\nAnalyze the tone of this text:\n\n{user_input}\n\nAssistant:"
+            prompt = f"{SYSTEM_PROMPT}\nAnalyze the tone of this text:\n\n{user_input}\n\nAssistant:"
         elif task == "Translate Text" and tone_option:
-            prompt = f"{LINGUIST_PROMPT}\nRewrite this text in a more {tone_option.lower()} tone:\n\n{user_input}\n\nAssistant:"
+            prompt = f"{SYSTEM_PROMPT}\nRewrite this text in a more {tone_option.lower()} tone:\n\n{user_input}\n\nAssistant:"
         elif task == "Create Social Story":
-            prompt = f"{ADVOCATE_PROMPT}\nCreate a social story based on this text:\n\n{user_input}\n\nAssistant:"
+            prompt = f"{SYSTEM_PROMPT}\nCreate a social story based on this text:\n\n{user_input}\n\nAssistant:"
 
         # Send request to Ollama
         response = requests.post(OLLAMA_URL, json={"model": "gemma:2b", "prompt": prompt, "stream": False})
