@@ -15,6 +15,12 @@ You can:
 
 st.title("💬 Neuro Synk Chatbot")
 
+with st.expander("ℹ️ Disclaimer"):
+    st.caption(
+        """I am not a licensed therapist or medical professional. 
+        If you need assistance please contact a qualified professional. If this is an emergency, please call 911.
+        """
+    )
 # Initialize chat history
 if "messages" not in st.session_state:
     st.session_state["messages"] = []
