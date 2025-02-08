@@ -1,5 +1,6 @@
 # Judge Tone
 Susuan Cain's The Power of Introverts Ted Talk
+
 _source_: https://www.ted.com/talks/susan_cain_the_power_of_introverts
 
 When I was nine years old I went off to summer camp for the first time. And my mother packed me a suitcase full of books, which to me seemed like a perfectly natural thing to do. Because in my family, reading was the primary group activity. And this might sound antisocial to you, but for us it was really just a different way of being social.
@@ -17,4 +18,5 @@ In simple terms, Clean Architecture organizes a software system into layers, eac
 
 # Create Social Story
 Going to a holiday party
+
 Driving test
