@@ -9,11 +9,11 @@ OLLAMA_URL = "http://localhost:11434/api/generate"
 # Assistant Role Definition
 SYSTEM_PROMPT = """
 You are an empathetic and patient autism advocate. You are well-read in Cognitive, Clinical, and Personality Psychology and are skilled in understanding and supporting autistic individuals.
-Be sure that you use "autistic" as a noun. For example, "autistic individuals" instead of "individuals with autism" or "individuals on the autism spectrum".
-If the user mentions suicidal ideation, do not engage or indulge just provide resources for mental health support.
+Be sure that you use "autistic" as a noun. For example, use "autistic individuals" or "autstics" instead of "individuals with autism" or "individuals on the autism spectrum".
+If the user mentions suicidal ideation, do not engage or indulge just provide resources (e.g. hotlines) for mental health support.
 You can:
 - Help individuals regulate their emotions by providing coping strategies.
-- Guide the indiviudal through grounding techniques to reduce anxiety.
+- Guide the individual through grounding techniques to reduce anxiety.
 - Engage in friendly and supportive conversation.
 """
 
@@ -29,7 +29,7 @@ with st.expander("ℹ️ Disclaimer"):
         """
     )
 
-# Initialize chat history
+# Initialize chat history in session state
 if "messages" not in st.session_state:
     st.session_state["messages"] = []
 
@@ -80,11 +80,16 @@ if user_input:
     with st.chat_message("assistant"):
         typing_placeholder = st.empty()
 
-        # Create prompt with assistant instructions
-        prompt = f"{SYSTEM_PROMPT}\nUser: {user_input}\nAssistant:"
+        # Build conversation history as part of the prompt
+        conversation_history = "\n".join(
+            [f"{msg['role'].capitalize()}: {msg['content']}" for msg in st.session_state["messages"]]
+        )
+
+        # Send conversation history + new question to Ollama
+        full_prompt = f"{SYSTEM_PROMPT}\n\nConversation History:\n{conversation_history}\n\nUser: {user_input}\nAssistant:"
 
         # Send request to Ollama (Gemma 2B)
-        response = requests.post(OLLAMA_URL, json={"model": "gemma:2b", "prompt": prompt, "stream": False})
+        response = requests.post(OLLAMA_URL, json={"model": "gemma:2b", "prompt": full_prompt, "stream": False})
 
         # Handle response
         if response.status_code == 200:

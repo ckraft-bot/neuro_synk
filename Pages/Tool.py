@@ -1,12 +1,13 @@
 import streamlit as st
 import requests
+import time
 
 # Ollama API endpoint
 OLLAMA_URL = "http://localhost:11434/api/generate"
 
 # Assistant Role Definition
 SYSTEM_PROMPT = """ 
-You are a professional linguist, skilled in analyzing tone and translating text; you are deigned to help autistic individuals with written communication. 
+You are a professional linguist, skilled in analyzing tone and translating text; you are designed to help autistic individuals with written communication. 
 You can:
 - Judge the tone of a given text (e.g., professional, sarcastic, neutral, aggressive).
 - Transform text into different tones (e.g., more formal, more friendly, more concise).
@@ -14,7 +15,7 @@ You can:
 - Provide clear, concise, and structured responses that are easy to understand.
 """
 
-st.title("Neuro Synk Tool:gear:")
+st.title("Neuro Synk Tool ⚙️")
 
 # User selects a task
 task = st.segmented_control("How can I help you?", ["Judge Tone", "Translate Text", "Create Social Story"])
@@ -25,7 +26,7 @@ tone_option = None
 if task == "Translate Text":
     tone_option = st.selectbox("Choose a tone:", ["Assertive", "Empathetic", "Formal", "Friendly", "Humorous", "Informal", "Neutral", "Sarcastic"])
 
-if st.button(":sparkles: Synk Up! :sparkles:"):
+if st.button("✨ Synk Up! ✨"):
     if user_input:
         # Modify prompt based on task
         if task == "Judge Tone":
@@ -35,8 +36,18 @@ if st.button(":sparkles: Synk Up! :sparkles:"):
         elif task == "Create Social Story":
             prompt = f"{SYSTEM_PROMPT}\nCreate a social story based on this text:\n\n{user_input}\n\nAssistant:"
 
+        # Create an animated loading indicator
+        loading_text = st.empty()
+        dots = ["", ".", "..", "..."]
+        for i in range(15):  # Adjust duration
+            time.sleep(0.3)
+            loading_text.markdown(f"**Generating response{dots[i % len(dots)]}**")
+
         # Send request to Ollama
         response = requests.post(OLLAMA_URL, json={"model": "gemma:2b", "prompt": prompt, "stream": False})
+
+        # Clear loading indicator once response is ready
+        loading_text.empty()
 
         # Display response
         if response.status_code == 200:
