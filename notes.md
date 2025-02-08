@@ -11,6 +11,67 @@ splits = {'train': 'train_df.csv', 'validation': 'val_df.csv', 'test': 'test_df.
 df = pd.read_csv("hf://datasets/Sp1786/multiclass-sentiment-analysis-dataset/" + splits["train"])
 ```
 
+## Common Communication Tones
+### Formal:
+**Description:** Structured, objective, and often used in professional or academic contexts.  
+**Example:** "Dear Dr. Smith, I am writing to inquire about the research opportunity available in your department."  
+**Research Insight:** Formal language is associated with respect for hierarchy and context-appropriateness (e.g., DeVault & McCroskey, 1992).
+
+### Informal:
+**Description:** Casual, conversational, and typically used among friends or in relaxed environments.  
+**Example:** "Hey, what's up? Wanna grab a coffee later?"  
+**Research Insight:** Informal language fosters closeness and relatability, as noted in studies of interpersonal communication (Pennebaker, Mehl, & Niederhoffer, 2003).
+
+### Friendly/Warm:
+**Description:** Conveys approachability, kindness, and openness. It often includes supportive and positive language.  
+**Example:** "Hi there! I hope you're having a great day. Let me know if there's anything I can do to help."  
+**Research Insight:** Warmth is a key component in building trust and rapport (Fiske, Cuddy, & Glick, 2007).
+
+### Empathetic:
+**Description:** Shows understanding, compassion, and sensitivity to the feelings of others.  
+**Example:** "I understand that this has been a challenging time for you; please know I'm here to support you."  
+**Research Insight:** Empathy in communication is crucial for effective support and has been extensively discussed in the literature on emotional intelligence and interpersonal communication (Pennebaker et al., 2003).
+
+### Assertive:
+**Description:** Direct, confident, and clear, often used when setting boundaries or making requests.  
+**Example:** "I need the report by 3 PM today so we can finalize our strategy."  
+**Research Insight:** Assertiveness balances directness with respect and is critical in organizational settings (DeVito, 2012).
+
+### Humorous:
+**Description:** Light-hearted, playful, and often intended to entertain or ease tension.  
+**Example:** "I tried to catch some fog yesterday. I mist."  
+**Research Insight:** Humor has been studied extensively in linguistics (Attardo, 2001) and is known to improve engagement and social bonding when used appropriately.
+
+### Sarcastic/Ironic:
+**Description:** Uses irony or exaggeration to convey contempt or humor, often with an undercurrent of criticism.  
+**Example:** "Oh great, another meeting. Just what I needed!"  
+**Research Insight:** Sarcasm is a complex communicative tool that can both entertain and alienate, depending on the context and the relationship between communicators (Attardo, 2001).
+
+__Evidence and Research Citations__
+- Pennebaker, J. W., Mehl, M. R., & Niederhoffer, K. G. (2003).  
+  *Psychological aspects of natural language use: our words, our selves.*  
+  Annual Review of Psychology, 54, 547–577.  
+  This review discusses how language reflects psychological states, including the use of different tones and styles.
+
+- Fiske, S. T., Cuddy, A. J. C., & Glick, P. (2007).  
+  *Universal dimensions of social cognition: warmth and competence.*  
+  Trends in Cognitive Sciences, 11(2), 77–83.  
+  This paper outlines the importance of warmth (a key component of friendly and empathetic tones) in social interactions.
+
+- Attardo, S. (2001).  
+  *Humorous texts: A semantic system of analysis.*  
+  Walter de Gruyter.  
+  Attardo's work provides a detailed analysis of humor and sarcasm in communication.
+
+- DeVault, D., & McCroskey, J. C. (1992).  
+  *Communication Apprehension, Avoidance, and Effectiveness.*  
+  Communication Research Reports.  
+  This research discusses various communication styles, including the use of formal versus informal language in different contexts.
+
+- IBM Watson Tone Analyzer (2017).  
+  Retrieved from IBM Watson Tone Analyzer  
+  IBM’s tool is based on psychological research and is used to detect and classify tones in written text.
+
 # FINE TUNING MODELS
 - gemma 2b out of box
 - hugging face + PEFT + QLORA
