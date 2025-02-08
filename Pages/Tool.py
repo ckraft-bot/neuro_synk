@@ -5,7 +5,7 @@ import time
 # Ollama API endpoint
 OLLAMA_URL = "http://localhost:11434/api/generate"
 
-# Assistant Role Definition
+# Assistant Role Definition (same for all tasks)
 SYSTEM_PROMPT = """ 
 You are a professional linguist, skilled in analyzing tone and translating text; you are designed to help autistic individuals with written communication. 
 You can:
@@ -26,6 +26,9 @@ tone_option = None
 if task == "Translate Text":
     tone_option = st.selectbox("Choose a tone:", ["Assertive", "Empathetic", "Formal", "Friendly", "Humorous", "Informal", "Neutral", "Sarcastic"])
 
+# Default initialization of prompt
+prompt = SYSTEM_PROMPT
+
 if st.button("✨ Synk Up! ✨"):
     if user_input:
         # Modify prompt based on task
@@ -39,8 +42,8 @@ if st.button("✨ Synk Up! ✨"):
         # Create an animated loading indicator
         loading_text = st.empty()
         dots = ["", ".", "..", "..."]
-        for i in range(15): # Control how many times the animation should loop
-            time.sleep(0.3) # Adjust this value for animation speed
+        for i in range(15):  # Control how many times the animation should loop
+            time.sleep(0.3)  # Adjust this value for animation speed
             loading_text.markdown(f"**Generating response{dots[i % len(dots)]}**")
 
         # Send request to Ollama
