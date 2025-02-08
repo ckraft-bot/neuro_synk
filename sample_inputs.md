@@ -17,6 +17,6 @@ At its core, Clean Architecture tries to ensure that the most important parts of
 In simple terms, Clean Architecture organizes a software system into layers, each with a specific responsibility. Dependencies flow only in one direction: toward the core business logic. This structure helps keep the system modular, testable, and resilient to changes.
 
 # Create Social Story
-Going to a holiday party
+Going to a family holiday party
 
 Driving test
