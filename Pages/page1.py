@@ -23,7 +23,7 @@ You can:
 st.title("Sync :arrow_up: with Neuro Synk")
 
 # User selects a task
-task = st.segmented_control("How can I be helpful to you?", ["Judge Tone", "Translate Text", "Create Social Story"])
+task = st.segmented_control("How can I help you?", ["Judge Tone", "Translate Text", "Create Social Story"])
 
 # Text input
 user_input = st.text_area("Enter text here:")
