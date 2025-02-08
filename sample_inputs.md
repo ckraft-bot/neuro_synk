@@ -5,7 +5,7 @@ _source_: https://www.ted.com/talks/susan_cain_the_power_of_introverts
 
 When I was nine years old I went off to summer camp for the first time. And my mother packed me a suitcase full of books, which to me seemed like a perfectly natural thing to do. Because in my family, reading was the primary group activity. And this might sound antisocial to you, but for us it was really just a different way of being social.
 
-You have the animal warmth of your family sitting right next to you, but you are also free to go roaming around the adventureland inside your own mind. And I had this idea that camp was going to be just like this, but better. I had a vision of 10 girls sitting in a cabin cozily reading books in their matching nightgowns.
+You have the animal warmth of your family sitting right next to you, but you are also free to go roaming around the adventure land inside your own mind. And I had this idea that camp was going to be just like this, but better. I had a vision of 10 girls sitting in a cabin cozily reading books in their matching nightgowns.
 
 # Translate Text
 _source_: https://blog.bytebytego.com/p/clean-architecture-101-building-software?utm_source=substack&utm_medium=email

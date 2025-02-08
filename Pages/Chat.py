@@ -1,20 +1,22 @@
 import streamlit as st
 import requests
-import time 
+import speech_recognition as sr
+import time
 
 # Ollama API endpoint
 OLLAMA_URL = "http://localhost:11434/api/generate"
 
 # Assistant Role Definition
 SYSTEM_PROMPT = """
-You are an empathetic and patient autism advocate. You are well read in Cognitive, Clinical, and Personality Psychology and are skilled in understanding and supporting autistic individuals.
+You are an empathetic and patient autism advocate. You are well-read in Cognitive, Clinical, and Personality Psychology and are skilled in understanding and supporting autistic individuals.
 You can:
 - Help individuals regulate their emotions by providing coping strategies.
 - Engage in friendly and supportive conversation.
 - Discourage suicidal ideation and provide resources for mental health support.
+- Use "autistic" as a noun. For example, "autistic individuals" instead of "individuals with autism", "individuals on the autism spectrum".
 """
 
-st.title("Neuro Synk Chat:left_speech_bubble:")
+st.title("Neuro Synk Chat 💬")
 
 with st.expander("ℹ️ Disclaimer"):
     st.caption(
@@ -30,22 +32,42 @@ with st.expander("ℹ️ Disclaimer"):
 if "messages" not in st.session_state:
     st.session_state["messages"] = []
 
+# Speech-to-Text Function (Voice Input Only)
+def recognize_speech():
+    recognizer = sr.Recognizer()
+    with sr.Microphone() as source:
+        st.info("🎤 Listening... Speak now!")
+        try:
+            audio = recognizer.listen(source, timeout=5)
+            text = recognizer.recognize_google(audio)
+            return text
+        except sr.UnknownValueError:
+            return "Sorry, I couldn't understand that."
+        except sr.RequestError:
+            return "Speech recognition service is unavailable."
+        except sr.WaitTimeoutError:
+            return "No speech detected, please try again."
+
 # Display chat history
 for msg in st.session_state["messages"]:
     with st.chat_message(msg["role"]):
         st.markdown(msg["content"])
 
-# Initialize chat history
-if "messages" not in st.session_state:
-    st.session_state["messages"] = []
+# User chooses input method
+input_method = st.radio("Choose input method:", ["Type", "Speak"])
 
-# Display chat history
-for msg in st.session_state["messages"]:
-    with st.chat_message(msg["role"]):
-        st.markdown(msg["content"])
+# Get user input
+user_input = None
+if input_method == "Type":
+    user_input = st.chat_input("Ask me anything...")
+elif input_method == "Speak":
+    if st.button("🎤 Speak Now"):
+        user_input = recognize_speech()
+        if user_input:
+            st.success(f"🎙️ You said: {user_input}")
 
-# User input field
-if user_input := st.chat_input("Ask me anything..."):
+# Process User Input
+if user_input:
     # Add user input to chat history
     st.session_state["messages"].append({"role": "user", "content": user_input})
 
@@ -55,7 +77,7 @@ if user_input := st.chat_input("Ask me anything..."):
 
     # Create a placeholder for the assistant's "typing" animation
     with st.chat_message("assistant"):
-        typing_placeholder = st.empty()  # Placeholder for animation
+        typing_placeholder = st.empty()
 
         # Create prompt with assistant instructions
         prompt = f"{SYSTEM_PROMPT}\nUser: {user_input}\nAssistant:"
@@ -74,7 +96,7 @@ if user_input := st.chat_input("Ask me anything..."):
         for char in bot_reply:
             displayed_text += char
             typing_placeholder.markdown(displayed_text + "▌")  # Cursor effect
-            time.sleep(0.02)  # Adjust speed here
+            time.sleep(0.02)  # Adjust typing speed
 
         # Replace the animation with the final text
         typing_placeholder.markdown(bot_reply)
