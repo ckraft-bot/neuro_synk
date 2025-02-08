@@ -14,7 +14,7 @@ You can:
 - Provide clear, concise, and structured responses that are easy to understand.
 """
 
-st.title("Sync :arrow_up: with Neuro Synk")
+st.title("Neuro Synk Tool:gear:")
 
 # User selects a task
 task = st.segmented_control("How can I help you?", ["Judge Tone", "Translate Text", "Create Social Story"])

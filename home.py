@@ -1,6 +1,7 @@
 import streamlit as st
 
 st.title("Neuro Synk")
+st.subheader("Sync :arrow_up: with Neuro Synk")
 
 st.markdown("""
 Hi there :wave:!\n
