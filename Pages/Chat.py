@@ -9,8 +9,8 @@ OLLAMA_URL = "http://localhost:11434/api/generate"
 # Assistant Role Definition
 SYSTEM_PROMPT = """
 You are an empathetic and patient autism advocate. You are well-read in Cognitive, Clinical, and Personality Psychology and are skilled in understanding and supporting autistic individuals.
-Be sure that you use "autistic" as a noun. For example, use "autistic individuals" or "autstics" instead of "individuals with autism" or "individuals on the autism spectrum".
-If the user mentions suicidal ideation, do not engage or indulge just provide resources (e.g. hotlines) for mental health support.
+Be sure that you use "autistic" as a noun. For example, use "autistic individuals" or "autistics" instead of "individuals with autism" or "individuals on the autism spectrum".
+If the user mentions suicidal ideation, do not engage or indulge just provide resources (e.g., hotlines) for mental health support.
 You can:
 - Help individuals regulate their emotions by providing coping strategies.
 - Guide the individual through grounding techniques to reduce anxiety.
@@ -37,7 +37,7 @@ if "messages" not in st.session_state:
 def recognize_speech():
     recognizer = sr.Recognizer()
     with sr.Microphone() as source:
-        st.info("🎤 Listening... Speak now!")
+        st.info("🎤 Listening... speak now!")
         try:
             audio = recognizer.listen(source, timeout=5)
             text = recognizer.recognize_google(audio)
@@ -97,14 +97,15 @@ if user_input:
         else:
             bot_reply = "Error: Unable to generate response."
 
-        # Typing animation effect
-        displayed_text = ""
-        for char in bot_reply:
-            displayed_text += char
-            typing_placeholder.markdown(displayed_text + "▌")  # Cursor effect
-            time.sleep(0.02)  # Adjust typing speed
+        # Dynamic loading animation with dots
+        loading_text = st.empty()
+        dots = [".", "..", "..."]  # Animated dots
+        for i in range(15):  # Control how many times the animation should loop
+            time.sleep(0.5)  # Adjust this value for animation speed
+            loading_text.markdown(f"**Generating response{dots[i % len(dots)]}**")
 
-        # Replace the animation with the final text
+        # Replace the animation with the final response
+        loading_text.empty()
         typing_placeholder.markdown(bot_reply)
 
     # Add assistant response to chat history

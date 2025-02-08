@@ -39,8 +39,8 @@ if st.button("✨ Synk Up! ✨"):
         # Create an animated loading indicator
         loading_text = st.empty()
         dots = ["", ".", "..", "..."]
-        for i in range(15):  # Adjust duration
-            time.sleep(0.3)
+        for i in range(15): # Control how many times the animation should loop
+            time.sleep(0.3) # Adjust this value for animation speed
             loading_text.markdown(f"**Generating response{dots[i % len(dots)]}**")
 
         # Send request to Ollama
