@@ -17,6 +17,4 @@ In simple terms, Clean Architecture organizes a software system into layers, eac
 
 # Create Social Story
 Going to a holiday party
-
-# Infodump
-Rockets
+Driving test
