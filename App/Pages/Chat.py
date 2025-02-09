@@ -7,7 +7,7 @@ import time
 OLLAMA_URL = "http://localhost:11434/api/generate"
 
 # Assistant Role Definitions
-ADVOCATE_PROMPT = """
+ALLY_PROMPT = """
 You are an empathetic and patient autism advocate. You are well-read in Cognitive, Clinical, and Personality Psychology and are skilled in understanding and supporting autistic individuals.
 Be sure that you use "autistic" as a noun. For example, use "autistic individuals" or "autistics" instead of "individuals with autism" or "individuals on the autism spectrum".
 If the user mentions suicidal ideation, do not engage or indulge just provide resources (e.g., hotlines) for mental health support.
@@ -78,7 +78,7 @@ elif input_method == "Speak":
 # Process User Input
 if user_input:
     # Set the appropriate system prompt based on the selected role
-    system_prompt = ADVOCATE_PROMPT if role == "Emotional Regulation" else PROFESSOR_PROMPT
+    system_prompt = ALLY_PROMPT if role == "Emotional Regulation" else PROFESSOR_PROMPT
 
     # Add user input to chat history
     st.session_state["messages"].append({"role": "user", "content": user_input})
