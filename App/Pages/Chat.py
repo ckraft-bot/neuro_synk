@@ -107,13 +107,25 @@ if user_input:
         full_prompt = f"{system_prompt}\n\nConversation History:\n{conversation_history}\n\nUser: {user_input}\nAssistant:"
 
         # Send request to Ollama (Gemma 2B)
-        response = requests.post(OLLAMA_URL, json={"model": "gemma:2b", "prompt": full_prompt, "stream": False})
+        response = requests.post(OLLAMA_URL, json={"model": "gemma2:2b", "prompt": full_prompt, "stream": False})
 
         # Handle response
         if response.status_code == 200:
             bot_reply = response.json()["response"]
         else:
             bot_reply = "Error: Unable to generate response."
+
+        # Handle response
+        if response.status_code == 200:
+            bot_reply = response.json()["response"]
+        else:
+            try:
+                error_message = response.json()  # Try to parse JSON error details
+            except ValueError:
+                error_message = response.text  # If not JSON, return raw text
+
+            bot_reply = f"Error {response.status_code}: {error_message}"
+
 
         # Typing animation effect
         displayed_text = ""

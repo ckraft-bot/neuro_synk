@@ -54,7 +54,7 @@ if st.button("✨ Synk Up! ✨"):
             loading_text.markdown(f"**Generating response{dots[i % len(dots)]}**")
 
         # Send request to Ollama
-        response = requests.post(OLLAMA_URL, json={"model": "gemma:2b", "prompt": prompt, "stream": False})
+        response = requests.post(OLLAMA_URL, json={"model": "gemma2:2b", "prompt": prompt, "stream": False})
 
         # Clear loading indicator once response is ready
         loading_text.empty()
