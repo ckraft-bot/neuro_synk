@@ -32,6 +32,13 @@ You can:
 
 st.title("Neuro Synk Chat 💬")
 
+st.sidebar.markdown(
+    '<a href="https://ko-fi.com/clairekraft" target="_blank">'
+    '<img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" width="200" alt="Buy Me a Coffee">'
+    '</a>',
+    unsafe_allow_html=True
+)
+
 # Initialize chat history in session state if it doesn't exist
 if "messages" not in st.session_state:
     st.session_state["messages"] = []
