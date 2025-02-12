@@ -1,6 +1,7 @@
 import streamlit as st
 import requests
 import time
+from utility import donate
 
 # Ollama API endpoint
 OLLAMA_URL = "http://localhost:11434/api/generate"
@@ -17,12 +18,7 @@ You can:
 
 st.title("Neuro Synk Tool ⚙️")
 
-st.sidebar.markdown(
-    '<a href="https://ko-fi.com/clairekraft" target="_blank">'
-    '<img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" width="200" alt="Buy Me a Coffee">'
-    '</a>',
-    unsafe_allow_html=True
-)
+donate()
 
 # User selects a task
 task = st.segmented_control("How can I help you?", ["Judge Tone", "Translate Text", "Create Social Story"])
