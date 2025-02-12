@@ -1,10 +1,7 @@
 import streamlit as st
 import requests
 import time
-from utility import donate
-
-# Ollama API endpoint
-OLLAMA_URL = "http://localhost:11434/api/generate"
+from utility import *
 
 # Assistant Role Definition (same for all tasks)
 SYSTEM_PROMPT = """ 

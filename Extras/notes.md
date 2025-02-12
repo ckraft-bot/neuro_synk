@@ -138,3 +138,30 @@ end = time.time()
 
 print("Time taken for 100 tokens:", end - start, "seconds")
 ```
+
+# DOCKER
+1. Install docker, create an account
+2. Create a container called "ollama" based on an existing ollama docker image
+
+```bash
+docker run -d -v ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama
+```
+3. Start container - run a model inside the contianer
+```bash
+docker run -d --gpus=all -v ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama
+```
+4. Run model locally, choose your model
+```bash
+docker exec -it ollama ollama run gemma2:2b
+```
+4. To list models in the container
+```bash
+docker exec -it ollama ollama list models
+```
+5. Find api address
+```bash
+docker inspect ollama
+```
+
+# CLOUD HOSTING SERVICE
+I'm trying out  [Digital Ocean](https://www.digitalocean.com/)

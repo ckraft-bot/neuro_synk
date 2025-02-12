@@ -1,4 +1,6 @@
 import streamlit as st
+OLLAMA_URL = "http://localhost:11434/api/generate"
+
 def donate():
     """Streamlit donation options."""
     st.sidebar.markdown(

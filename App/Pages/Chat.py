@@ -2,10 +2,7 @@ import streamlit as st
 import requests
 import speech_recognition as sr
 import time
-from utility import donate
-
-# Ollama API endpoint
-OLLAMA_URL = "http://localhost:11434/api/generate"
+from utility import *
 
 # Assistant Role Definitions
 ALLY_PROMPT = """
