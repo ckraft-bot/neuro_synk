@@ -165,3 +165,7 @@ docker inspect ollama
 
 # CLOUD HOSTING SERVICE
 I'm trying out  [Digital Ocean](https://www.digitalocean.com/)
+- ssh key for droplet 
+  - run ```ssh-keygen``` in terminal, creaete, save, read the ssh file
+  - ssh file called 'docker_ssh.pub'
+  
