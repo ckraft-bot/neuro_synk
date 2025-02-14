@@ -167,5 +167,6 @@ docker inspect ollama
 I'm trying out  [Digital Ocean](https://www.digitalocean.com/)
 - ssh key for droplet 
   - run ```ssh-keygen``` in terminal, creaete, save, read the ssh file
-  - ssh file called 'docker_ssh.pub'
-  
+  - paste the key contents into digital ocean
+  - ssh file saved locally called 'docker_ssh.pub'
+- configure secret scope for doctl, follow this [guide](https://docs.digitalocean.com/reference/doctl/how-to/install/)
