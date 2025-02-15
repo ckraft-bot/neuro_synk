@@ -152,7 +152,8 @@ docker run -d --gpus=all -v ollama:/root/.ollama -p 11434:11434 --name ollama ol
 ```
 4. Run model locally, choose your model
 ```bash
-docker exec -it ollama ollama run gemma2:2b
+docker exec -it ollama ollama run gemma2:2b # gemma2
+ollama run deepseek-r1:7b # DeepSeek-R1-Distill-Qwen-7B
 ```
 4. To list models in the container
 ```bash
