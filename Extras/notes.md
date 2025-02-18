@@ -165,6 +165,7 @@ docker inspect ollama
 ```
 
 # CLOUD HOSTING SERVICE
+## config
 I'm trying out  [Digital Ocean](https://www.digitalocean.com/)
 - ssh key for droplet 
   - run ```ssh-keygen``` in terminal, creaete, save, read the ssh file
@@ -172,6 +173,8 @@ I'm trying out  [Digital Ocean](https://www.digitalocean.com/)
   - ssh file saved locally called 'docker_ssh.pub'
 - configure secret scope for doctl, follow this [guide](https://docs.digitalocean.com/reference/doctl/how-to/install/)
 - or set up a password instead of ssh key
+
+## connect to digital ocean
 - ssh into droplet
 ```bash
 ssh root@your-droplet-ip
@@ -185,4 +188,36 @@ ip a
 ```bash
 sudo ufw status 
 ``` 
+## deploy docker container
+- install git (only have to do first time)
+```bash
+sudo apt update && sudo apt install -y git
+```
 
+- clone repo
+```bash
+git clone https://github.com/your-username/your-repo.git
+cd your-repo
+ls
+```
+- update package list
+``` bash
+sudo apt update
+```
+
+- install docker
+```bash
+sudo apt install -y docker.io
+```
+
+- start docker and enable it to run at boot
+```bash
+sudo systemctl start docker
+sudo systemctl enable docker
+```
+
+- verify docker install
+I've got Docker version 26.1.3, build 26.1.3-0ubuntu1~24.04.1
+```bash
+docker --version
+```
