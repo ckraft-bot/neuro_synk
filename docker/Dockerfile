@@ -5,7 +5,7 @@ FROM ollama/ollama:latest
 RUN ollama pull gemma2:2b
 
 # Copy the entry script and make it executable
-COPY entrypoint.sh /entrypoint.sh
+COPY docker/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 # Expose Ollama's default port
