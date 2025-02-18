@@ -139,85 +139,178 @@ end = time.time()
 print("Time taken for 100 tokens:", end - start, "seconds")
 ```
 
-# DOCKER
-1. Install docker, create an account
-2. Create a container called "ollama" based on an existing ollama docker image
+# DOCKER (LOCAL)
+## Prerequisites
+
+1. Install Docker: [Docker Installation Guide](https://docs.docker.com/get-docker/)
+2. Create a Docker account or sign in.
+
+## Create a Local Container
+
+1. Create a local container called "ollama" based on an existing Ollama Docker image:
 
 ```bash
 docker run -d -v ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama
 ```
-3. Start container - run a model inside the contianer
+
+## Start Container and Run a Model
+
+1. Start the container:
+
 ```bash
 docker run -d --gpus=all -v ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama
 ```
-4. Run model locally, choose your model
+
+2. Run the model locally and choose your model:
+
+![Model Selection](Extras/model_on_local_docker.png)
+
 ```bash
-docker exec -it ollama ollama run gemma2:2b # gemma2
+docker exec -it ollama ollama run gemma2:2b # Gemma2
 ollama run deepseek-r1:7b # DeepSeek-R1-Distill-Qwen-7B
 ```
-4. To list models in the container
+
+## List Models in the Container
+
+To list models in the container:
+
 ```bash
 docker exec -it ollama ollama list models
 ```
-5. Find api address
+
+## Find API Address
+
+To find the API address:
+
 ```bash
 docker inspect ollama
 ```
 
 # CLOUD HOSTING SERVICE
-## config
-I'm trying out  [Digital Ocean](https://www.digitalocean.com/)
-- ssh key for droplet 
-  - run ```ssh-keygen``` in terminal, creaete, save, read the ssh file
-  - paste the key contents into digital ocean
-  - ssh file saved locally called 'docker_ssh.pub'
-- configure secret scope for doctl, follow this [guide](https://docs.digitalocean.com/reference/doctl/how-to/install/)
-- or set up a password instead of ssh key
+## Config
 
-## connect to digital ocean
-- ssh into droplet
-```bash
-ssh root@your-droplet-ip
-ssh root@ipv4
-```
-- to see the network interfaces and IP address
-```bash
-ip a
-```  
-- to check the firewall rules
-```bash
-sudo ufw status 
-``` 
-## deploy docker container
-- install git (only have to do first time)
-```bash
-sudo apt update && sudo apt install -y git
-```
+I'm trying out [Digital Ocean](https://www.digitalocean.com/)
 
-- clone repo
-```bash
-git clone https://github.com/your-username/your-repo.git
-cd your-repo
-ls
-```
-- update package list
-``` bash
-sudo apt update
-```
+1. **Create a droplet**
+    - Create a droplet like so:
+    
+    ![create droplet](Extras/create_droplet_server.png)
 
-- install docker
-```bash
-sudo apt install -y docker.io
-```
+2. **Configure SSH key for droplet**
+    - Run `ssh-keygen` in terminal, create, save, and read the SSH file.
+    - Paste the key contents into Digital Ocean.
+    - The SSH file saved locally called 'docker_ssh.pub'.
 
-- start docker and enable it to run at boot
-```bash
-sudo systemctl start docker
-sudo systemctl enable docker
-```
+3. **Configure secret scope for doctl**:
+    - Follow this [guide](https://docs.digitalocean.com/reference/doctl/how-to/install/).
+    - Alternatively, set up a password instead of an SSH key.
 
-- verify docker install
-I've got Docker version 26.1.3, build 26.1.3-0ubuntu1~24.04.1
-```bash
-docker --version
-```
+## Connect to Digital Ocean
+
+1. **SSH into droplet**
+    
+    ```bash
+    ssh root@your-droplet-ip
+    ssh root@ipv4
+    ```
+
+2. **See the network interfaces and IP address**
+    
+    ```bash
+    ip a
+    ```
+
+3. **Check the firewall rules**
+
+    ```bash
+    sudo ufw status 
+    ```
+
+## Deploy Docker Container
+
+1. **Install Git (only have to do this the first time)**
+
+    ```bash
+    sudo apt update && sudo apt install -y git
+    ```
+
+2. **Clone the repo**
+
+    ```bash
+    git clone https://github.com/your-username/your-repo.git
+    cd your-repo
+    ls
+    ```
+
+3. **Update the package list**
+
+    ```bash
+    sudo apt update
+    ```
+
+4. **Install Docker**
+
+    ```bash
+    sudo apt install -y docker.io
+    ```
+
+5. **Start Docker and enable it to run at boot**
+
+    ```bash
+    sudo systemctl start docker
+    sudo systemctl enable docker
+    ```
+
+6. **Verify Docker installation**
+    - Ensure you have Docker version 26.1.3, build 26.1.3-0ubuntu1~24.04.1.
+
+    ```bash
+    docker --version
+    ```
+
+## Build Docker Image
+
+1. **Navigate to the directory**
+
+    ```bash
+    cd /path/to/your-repo
+    ```
+
+2. **Build Docker image**
+    - This will build the Docker image using the Dockerfile and entrypoint.sh in your `docker/` directory.
+
+    ```bash
+    sudo docker build -t your-image-name .
+    sudo docker build -t neuro_synk .
+    ```
+
+3. **Run Docker container**
+
+    ```bash 
+    sudo docker run -d -p 11434:11434 neuro_synk
+    ```
+
+4. **Verify container is running**
+
+    ```bash
+    sudo docker ps
+    ```
+
+5. **Access the URL**
+
+    ```bash
+    http://your-droplet-ip:11434
+    ```
+
+6. **Make sure the droplet firewall allows traffic on port `11434`**
+
+    ```bash
+    sudo ufw allow 11434
+    ```
+
+7. **Monitor logs**
+
+    ```bash
+    sudo docker logs <container_id>
+    ```
+

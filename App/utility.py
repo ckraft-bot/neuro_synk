@@ -1,5 +1,5 @@
 import streamlit as st
-OLLAMA_URL = "http://localhost:11434/api/generate"
+OLLAMA_URL = "http://157.230.187.207:11434" #"http://localhost:11434/api/generate" <-- local
 
 def donate():
     """Streamlit donation options."""
