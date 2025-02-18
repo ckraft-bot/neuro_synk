@@ -171,4 +171,18 @@ I'm trying out  [Digital Ocean](https://www.digitalocean.com/)
   - paste the key contents into digital ocean
   - ssh file saved locally called 'docker_ssh.pub'
 - configure secret scope for doctl, follow this [guide](https://docs.digitalocean.com/reference/doctl/how-to/install/)
-- gemma2:2b minimally requires 4gb vram, 16 ram
+- or set up a password instead of ssh key
+- ssh into droplet
+```bash
+ssh root@your-droplet-ip
+ssh root@ipv4
+```
+- to see the network interfaces and IP address
+```bash
+ip a
+```  
+- to check the firewall rules
+```bash
+sudo ufw status 
+``` 
+
