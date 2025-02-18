@@ -171,3 +171,4 @@ I'm trying out  [Digital Ocean](https://www.digitalocean.com/)
   - paste the key contents into digital ocean
   - ssh file saved locally called 'docker_ssh.pub'
 - configure secret scope for doctl, follow this [guide](https://docs.digitalocean.com/reference/doctl/how-to/install/)
+- gemma2:2b minimally requires 4gb vram, 16 ram
