@@ -1,9 +1,7 @@
 import streamlit as st
 import requests
 import time
-
-# Ollama API endpoint
-OLLAMA_URL = "http://localhost:11434/api/generate"
+from utility import *
 
 # Assistant Role Definition (same for all tasks)
 SYSTEM_PROMPT = """ 
@@ -16,6 +14,8 @@ You can:
 """
 
 st.title("Neuro Synk Tool ⚙️")
+
+donate()
 
 # User selects a task
 task = st.segmented_control("How can I help you?", ["Judge Tone", "Translate Text", "Create Social Story"])
@@ -47,7 +47,7 @@ if st.button("✨ Synk Up! ✨"):
             loading_text.markdown(f"**Generating response{dots[i % len(dots)]}**")
 
         # Send request to Ollama
-        response = requests.post(OLLAMA_URL, json={"model": "gemma:2b", "prompt": prompt, "stream": False})
+        response = requests.post(OLLAMA_URL, json={"model": "gemma2:2b", "prompt": prompt, "stream": False})
 
         # Clear loading indicator once response is ready
         loading_text.empty()

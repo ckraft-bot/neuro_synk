@@ -138,3 +138,51 @@ end = time.time()
 
 print("Time taken for 100 tokens:", end - start, "seconds")
 ```
+
+# DOCKER
+1. Install docker, create an account
+2. Create a container called "ollama" based on an existing ollama docker image
+
+```bash
+docker run -d -v ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama
+```
+3. Start container - run a model inside the contianer
+```bash
+docker run -d --gpus=all -v ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama
+```
+4. Run model locally, choose your model
+```bash
+docker exec -it ollama ollama run gemma2:2b # gemma2
+ollama run deepseek-r1:7b # DeepSeek-R1-Distill-Qwen-7B
+```
+4. To list models in the container
+```bash
+docker exec -it ollama ollama list models
+```
+5. Find api address
+```bash
+docker inspect ollama
+```
+
+# CLOUD HOSTING SERVICE
+I'm trying out  [Digital Ocean](https://www.digitalocean.com/)
+- ssh key for droplet 
+  - run ```ssh-keygen``` in terminal, creaete, save, read the ssh file
+  - paste the key contents into digital ocean
+  - ssh file saved locally called 'docker_ssh.pub'
+- configure secret scope for doctl, follow this [guide](https://docs.digitalocean.com/reference/doctl/how-to/install/)
+- or set up a password instead of ssh key
+- ssh into droplet
+```bash
+ssh root@your-droplet-ip
+ssh root@ipv4
+```
+- to see the network interfaces and IP address
+```bash
+ip a
+```  
+- to check the firewall rules
+```bash
+sudo ufw status 
+``` 
+

@@ -2,12 +2,10 @@ import streamlit as st
 import requests
 import speech_recognition as sr
 import time
-
-# Ollama API endpoint
-OLLAMA_URL = "http://localhost:11434/api/generate"
+from utility import *
 
 # Assistant Role Definitions
-ADVOCATE_PROMPT = """
+ALLY_PROMPT = """
 You are an empathetic and patient autism advocate. You are well-read in Cognitive, Clinical, and Personality Psychology and are skilled in understanding and supporting autistic individuals.
 Be sure that you use "autistic" as a noun. For example, use "autistic individuals" or "autistics" instead of "individuals with autism" or "individuals on the autism spectrum".
 If the user mentions suicidal ideation, do not engage or indulge just provide resources (e.g., hotlines) for mental health support.
@@ -31,6 +29,8 @@ You can:
 """
 
 st.title("Neuro Synk Chat 💬")
+
+donate()
 
 # Initialize chat history in session state if it doesn't exist
 if "messages" not in st.session_state:
@@ -78,7 +78,7 @@ elif input_method == "Speak":
 # Process User Input
 if user_input:
     # Set the appropriate system prompt based on the selected role
-    system_prompt = ADVOCATE_PROMPT if role == "Emotional Regulation" else PROFESSOR_PROMPT
+    system_prompt = ALLY_PROMPT if role == "Emotional Regulation" else PROFESSOR_PROMPT
 
     # Add user input to chat history
     st.session_state["messages"].append({"role": "user", "content": user_input})
@@ -100,13 +100,25 @@ if user_input:
         full_prompt = f"{system_prompt}\n\nConversation History:\n{conversation_history}\n\nUser: {user_input}\nAssistant:"
 
         # Send request to Ollama (Gemma 2B)
-        response = requests.post(OLLAMA_URL, json={"model": "gemma:2b", "prompt": full_prompt, "stream": False})
+        response = requests.post(OLLAMA_URL, json={"model": "gemma2:2b", "prompt": full_prompt, "stream": False})
 
         # Handle response
         if response.status_code == 200:
             bot_reply = response.json()["response"]
         else:
             bot_reply = "Error: Unable to generate response."
+
+        # Handle response
+        if response.status_code == 200:
+            bot_reply = response.json()["response"]
+        else:
+            try:
+                error_message = response.json()  # Try to parse JSON error details
+            except ValueError:
+                error_message = response.text  # If not JSON, return raw text
+
+            bot_reply = f"Error {response.status_code}: {error_message}"
+
 
         # Typing animation effect
         displayed_text = ""
