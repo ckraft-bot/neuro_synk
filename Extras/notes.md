@@ -221,3 +221,42 @@ I've got Docker version 26.1.3, build 26.1.3-0ubuntu1~24.04.1
 ```bash
 docker --version
 ```
+## build docker image
+- navigate to the directory 
+```bash
+cd /path/to/your-repo
+```
+
+- build docker image
+This will build the Docker image using the Dockerfile and entrypoint.sh in your ```docker/``` directory.
+
+```bash
+sudo docker build -t your-image-name .
+sudo docker build -t neuro_synk .
+```
+
+- run docker contianer
+```bash 
+sudo docker run -d -p 11434:11434 neuro_synk
+```
+
+- verify contianer is running
+```bash
+sudo docker ps
+```
+
+- access the url
+```bash
+http://your-droplet-ip:11434
+
+```
+
+- make sure the droplet firewall allows traffic on port ```11434```
+```bash
+sudo ufw allow 11434
+```
+
+- monitor logs
+```bash
+sudo docker logs <container_id>
+```
