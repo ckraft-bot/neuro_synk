@@ -281,13 +281,13 @@ I'm trying out [Digital Ocean](https://www.digitalocean.com/)
 
     ```bash
     sudo docker build -t your-image-name .
-    sudo docker build -t neuro_synk .
     ```
 
 3. **Run Docker container**
+- Run the ollama/ollama container, binding port 11434 on the host
 
     ```bash 
-    sudo docker run -d -p 11434:11434 neuro_synk
+    sudo docker run -d -p 11434:11434 --name ollama_container ollama/ollama
     ```
 
 4. **Verify container is running**
