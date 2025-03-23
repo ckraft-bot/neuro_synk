@@ -7,39 +7,66 @@ import pydeck as pdk
 
 st.title("Stim")
 
-tool = st.sidebar.selectbox("Choose a fidget tool:", ["Particle Effect", "Rubik's Cube", "Sand Drawing", ])
+tool = st.sidebar.selectbox("Choose a fidget tool:", ["Light Switch", "Rubik's Cube", "Sand Drawing"])
 
-if tool == "Particle Effect":
-    st.subheader("Interactive Particle Effect")
+# ------------------------------------------
+# Light Switch (On/Off)
+# ------------------------------------------
+if tool == "Light Switch":
+    st.subheader("Interactive Light Switch")
 
-    num_particles = 500
-    data = np.random.rand(num_particles, 2) * [360, 180]  # Lat/Lon scaling
-    
-    layer = pdk.Layer(
-        "ScatterplotLayer",
-        data=pd.DataFrame(data, columns=["lon", "lat"]),
-        get_position="[lon, lat]",
-        get_radius=1000,
-        get_fill_color="[200, 30, 0, 160]",
-        pickable=True,
-    )
-    
-    view_state = pdk.ViewState(latitude=0, longitude=0, zoom=1)
-    
-    st.pydeck_chart(pdk.Deck(layers=[layer], initial_view_state=view_state))
+    # Toggle switch: Turns light on/off
+    light_on = st.checkbox("Toggle the light switch on/off", value=False)
 
+    if light_on:
+        st.write("The light is ON")
+        st.markdown(
+            """
+            <style>
+            .stApp {
+                background-color: #FCF14E; /* Light yellow background */
+            }
+            </style>
+            """, unsafe_allow_html=True
+        )
+        # Play sound when light is turned on
+        st.audio("\neuro_synk\Extras\switch-1.mp3") 
+
+    else:
+        st.write("The light is OFF")
+        st.markdown(
+            """
+            <style>
+            .stApp {
+                background-color: #626164; /* Dark background */
+            }
+            </style>
+            """, unsafe_allow_html=True
+        )
+        # Play sound when light is turned off
+        st.audio("\neuro_synk\Extras\switch-1.mp3") 
+
+# ------------------------------------------
+# Rubik's Cube (Interactive)
+# ------------------------------------------
 elif tool == "Rubik's Cube":
-    st.header("Interactive Rubiks Cube")
-
+    st.header("Interactive Rubik's Cube")
     components.iframe("https://codepen.io/bsehovac/full/EMyWVv", height=600)
 
+# ------------------------------------------
+# Sand Drawing (Interactive)
+# ------------------------------------------
 elif tool == "Sand Drawing":
     st.subheader("Sand Drawing")
     
+    # Draw color and stroke size
+    stroke_width = st.slider("Stroke Width", 1, 50, 3)
+    stroke_color = st.color_picker("Stroke Color", "#654321")  # Sand-like color
+    
     canvas_result = st_canvas(
         fill_color="#FFD700",  # Sand-like color
-        stroke_width=3,
-        stroke_color="#654321",  # Darker sand color
+        stroke_width=stroke_width,
+        stroke_color=stroke_color,
         background_color="#FFF8DC",  # Light sand color
         height=400,
         width=600,
@@ -48,5 +75,3 @@ elif tool == "Sand Drawing":
     )
     
     st.write("Use your mouse or touch input to draw in the sand!")
-
-
