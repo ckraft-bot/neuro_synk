@@ -2,6 +2,7 @@ import streamlit as st
 import streamlit.components.v1 as components
 from streamlit_drawable_canvas import st_canvas
 import numpy as np
+import os
 import pandas as pd
 import pydeck as pdk
 
@@ -9,15 +10,18 @@ st.title("Stim")
 
 tool = st.sidebar.selectbox("Choose a fidget tool:", ["Light Switch", "Rubik's Cube", "Sand Drawing"])
 
-# ------------------------------------------
-# Light Switch (On/Off)
-# ------------------------------------------
 if tool == "Light Switch":
     st.subheader("Interactive Light Switch")
 
     # Toggle switch: Turns light on/off
     light_on = st.checkbox("Toggle the light switch on/off", value=False)
 
+    # Absolute path to the audio file in the Extras folder
+    audio_file = "C:\\Users\\Clair\\Documents\\GitHub\\neuro_synk\\Extras\\switch-1.mp3" 
+
+    # Relative path to the audio file in the Extras folder
+    # audio_file = os.path.join("Extras", "switch-1.mp3")
+    
     if light_on:
         st.write("The light is ON")
         st.markdown(
@@ -29,8 +33,6 @@ if tool == "Light Switch":
             </style>
             """, unsafe_allow_html=True
         )
-        # Play sound when light is turned on
-        st.audio("\neuro_synk\Extras\switch-1.mp3") 
 
     else:
         st.write("The light is OFF")
@@ -43,8 +45,6 @@ if tool == "Light Switch":
             </style>
             """, unsafe_allow_html=True
         )
-        # Play sound when light is turned off
-        st.audio("\neuro_synk\Extras\switch-1.mp3") 
 
 # ------------------------------------------
 # Rubik's Cube (Interactive)
