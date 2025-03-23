@@ -1,4 +1,6 @@
 streamlit==1.41.1
 streamlit-extras==0.5.0
+streamlit-drawable-canvas==0.9.3
 SpeechRecognition==3.14.1 # voice input
+pydeck==0.8.1b0 # 3D visualization
 # pyttsx3==2.98 # voice output pyttsx3 or Google Text-to-Speech (gTTS)
